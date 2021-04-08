@@ -1,0 +1,31 @@
+{
+  "name": "crusp",
+  "version": "1.0.0",
+  "description": "CSWAP CrunchySwap repo",
+  "main": "truffle-config.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ProjectGoMad/cswap.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ProjectGoMad/cswap/issues"
+  },
+  "homepage": "https://github.com/ProjectGoMad/cswap#readme",
+  "dependencies": {
+    "@openzeppelin/contracts": "^3.4.1",
+    "@pancakeswap/pancake-swap-lib": "^0.0.4",
+    "@truffle/hdwallet-provider": "^1.2.6",
+    "@uniswap/lib": "*",
+    "@uniswap/v2-core": "^1.0.1",
+    "save": "^2.4.0",
+    "solc": "^0.8.3"
+  },
+  "devDependencies": {
+    "truffle-plugin-verify": "^0.5.7"
+  }
+}
