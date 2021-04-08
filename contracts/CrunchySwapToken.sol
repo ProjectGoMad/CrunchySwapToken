@@ -1,10 +1,10 @@
-// SPDX-License-Identifier: GPL 
+// SPDX-License-Identifier: GPL
 
 pragma solidity 0.6.12;
 
 import "@pancakeswap/pancake-swap-lib/contracts/token/BEP20/BEP20.sol";
 
-// CrunchySwapToken with Governance.
+// CrunchySwapToken with Community Governance.
 contract CrunchySwapToken is BEP20('CrunchySwap Token', 'CRUSP') {
     // @notice Creates `_amount` token to `_to`. Must only be called by the owner (MasterChef).
     function mint(address _to, uint256 _amount) public onlyOwner {
@@ -114,9 +114,9 @@ contract CrunchySwapToken is BEP20('CrunchySwap Token', 'CRUSP') {
         );
 
         address signatory = ecrecover(digest, v, r, s);
-        require(signatory != address(0), "CAKE::delegateBySig: invalid signature");
-        require(nonce == nonces[signatory]++, "CAKE::delegateBySig: invalid nonce");
-        require(now <= expiry, "CAKE::delegateBySig: signature expired");
+        require(signatory != address(0), "CRUSP::delegateBySig: invalid signature");
+        require(nonce == nonces[signatory]++, "CRUSP::delegateBySig: invalid nonce");
+        require(now <= expiry, "CRUSP::delegateBySig: signature expired");
         return _delegate(signatory, delegatee);
     }
 
@@ -146,7 +146,7 @@ contract CrunchySwapToken is BEP20('CrunchySwap Token', 'CRUSP') {
         view
         returns (uint256)
     {
-        require(blockNumber < block.number, "CAKE::getPriorVotes: not yet determined");
+        require(blockNumber < block.number, "CRUSP::getPriorVotes: not yet determined");
 
         uint32 nCheckpoints = numCheckpoints[account];
         if (nCheckpoints == 0) {
@@ -183,7 +183,7 @@ contract CrunchySwapToken is BEP20('CrunchySwap Token', 'CRUSP') {
         internal
     {
         address currentDelegate = _delegates[delegator];
-        uint256 delegatorBalance = balanceOf(delegator); // balance of underlying CAKEs (not scaled);
+        uint256 delegatorBalance = balanceOf(delegator); // balance of underlying CRUSPs (not scaled);
         _delegates[delegator] = delegatee;
 
         emit DelegateChanged(delegator, currentDelegate, delegatee);
@@ -219,7 +219,7 @@ contract CrunchySwapToken is BEP20('CrunchySwap Token', 'CRUSP') {
     )
         internal
     {
-        uint32 blockNumber = safe32(block.number, "CAKE::_writeCheckpoint: block number exceeds 32 bits");
+        uint32 blockNumber = safe32(block.number, "CRUSP::_writeCheckpoint: block number exceeds 32 bits");
 
         if (nCheckpoints > 0 && checkpoints[delegatee][nCheckpoints - 1].fromBlock == blockNumber) {
             checkpoints[delegatee][nCheckpoints - 1].votes = newVotes;
